@@ -1,22 +1,75 @@
 
-# Project 5: Shape Grammar
+# Procedural City
 
-For this assignment you'll be building directly off of the L-system code you
-wrote last week.
+**University of Pennsylvania, CIS 566**
+* Jiawei Wang
+* Pennkey: jiaww
+* Tested on: Windows 10, i7-6700 @ 2.60GHz 16.0GB, GTX 970M 3072MB (Personal)
+___
 
-**Goal:** to model an urban environment using a shape grammar.
+## Overview
+The goal of this project is to model an urban environment using a shape grammar. Although the project is only a one-week work, the details are pretty simple and direct. 
+Here are the final results:
 
-**Note:** We’re well aware that a nice-looking procedural city is a lot of work for a single week. Focus on designing a nice building grammar. The city layout strategies outlined in class (the extended l-systems) are complex and not expected. We will be satisfied with something reasonably simple, just not a uniform grid!
+|**Final Result(Seed = 24860)**|
+|---|
+|<img src="./results/city.JPG" width="800" height="600">|
 
-## Symbol Node (5 points)
-Modify your symbol node class to include attributes necessary for rendering, such as
-- Associated geometry instance
-- Position
-- Scale
-- Anything else you may need
+|**Without Texture**|**Population Density**|
+|---|---|
+|<img src="./results/city_no_tex.JPG" width="400" height="300">|<img src="./results/city_density.JPG" width="400" height="300">|
 
-## Grammar design (55 points)
-- Design at least five shape grammar rules for producing procedural buildings. Your buildings should vary in geometry and decorative features (beyond just differently-scaled cubes!). At least some of your rules should create child geometry that is in some way dependent on its parent’s state. (20 points)
+## Symbol Node
+ Symbol node class to include attributes necessary for rendering, such as
+``` javascript
+class Shape{
+    constructor(public predecessor: Shape, public symbol:string, public geometry:string, 
+        public pos:vec3, public rot:vec3, 
+        public scale:vec3, public xaxis:vec3, public zaxis:vec3){
+        this.predecessor = predecessor; // predescessor shape
+        this.symbol = symbol; // symbol for rule
+        this.geometry = geometry; // geometry for rendering
+        this.pos = pos; 
+        this.rot = rot;
+        this.scale = scale;
+        this.xaxis = xaxis;
+        this.zaxis = zaxis;
+    }
+}
+```
+
+## Grammar design
+* I designed 5 different buildings, they are:
+    * Building 1: **Rotating Skyscraper**
+        * the model is combined by 4 parts: base, middle, window and roof.
+        * the height is decided by the iteration times.
+        * the number of the windows for each floor is random(3 or 4).
+        * the rotation of each floor is also random.
+        
+        |**iteration=0**|**iteration>0**|
+        |---|---|
+        |<img src="./results/b1.JPG" width="200" height="350">|<img src="./results/b1_2.JPG" width="200" height="350">|
+    
+    * Building 2: **Circular Mall**
+        * the model is combined by 4 parts: base, middle, window and roof.
+        * the height is decided by the iteration times.
+        * the windows are around its outer surface
+        
+        |**iteration=0**|**iteration>0**|
+        |---|---|
+        |<img src="./results/b2.JPG" width="200" height="350">|<img src="./results/b2_2.JPG" width="200" height="350">|
+    
+    * Building 3: **Serrated Building**
+        * the model is combined by 4 parts: base, middle, window and roof.
+        * the height is decided by the iteration times.
+        * each middle floor is combined by 3 different parts with different colors.
+        * each middle part has 2 rows of different windows 
+        
+        |**iteration=0**|**iteration>0**|
+        |---|---|
+        |<img src="./results/b3.JPG" width="200" height="350">|<img src="./results/b3_2.JPG" width="200" height="350">|   
+   
+        
     - Eg. A building may be subdivided along the x, y, or z axis into two smaller buildings
     - Some of your rules must be designed to use some property about its location. (10 points)
     - Your grammar should have some element of variation so your buildings are non-deterministic.  Eg. your buildings sometimes subdivide along the x axis, and sometimes the y. (10 points)   
