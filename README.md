@@ -8,6 +8,8 @@
 ___
 
 ## Overview
+[Demo Link](https://jiaww.github.io/homework-5-shape-grammar-city-Jiaww/)
+
 The goal of this project is to model an urban environment using a shape grammar. Although the project is only a one-week work, the details are pretty simple and direct. 
 
 Here are the final results:
@@ -19,8 +21,6 @@ Here are the final results:
 |**Without Texture**|**Population Density**|
 |---|---|
 |<img src="./results/city_no_tex.JPG" width="400" height="300">|<img src="./results/city_density.JPG" width="400" height="300">|
-
-[Demo Link](https://jiaww.github.io/homework-5-shape-grammar-city-Jiaww/)
 
 ## Symbol Node
  Symbol node class to include attributes necessary for rendering, such as
