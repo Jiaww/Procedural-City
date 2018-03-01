@@ -26,6 +26,7 @@ in float fs_CurDens;
 
 out vec4 out_Col; // This is the final output color that you will see on your
                   // screen for the pixel that is currently being processed.
+const vec4 fogColor = vec4(0.9, 0.9, 0.9, 1.0);
 
 void main()
 {
@@ -45,9 +46,13 @@ void main()
                                                             //to simulate ambient lighting. This ensures that faces that are not
                                                             //lit by our point light are not completely black.
 
+        float dist = gl_FragCoord.z / gl_FragCoord.w;
+        float fogAmount = 1.0 /exp(dist * 0.01 * dist * 0.01);
+        fogAmount = clamp(fogAmount, 0.0, 1.0);
         // Compute final shaded color
         if (u_ShowDensity == 1)
             out_Col = vec4(fs_CurDens, fs_CurDens, fs_CurDens, diffuseColor.a);
         else
-            out_Col = vec4(diffuseColor.rgb * lightIntensity * 1.2, diffuseColor.a);
+            out_Col = mix(vec4(diffuseColor.rgb * lightIntensity * 1.2, diffuseColor.a), fogColor, 1.0-fogAmount);
+            //out_Col = vec4(fogAmount,fogAmount,fogAmount,1.0);
 }
