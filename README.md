@@ -8,7 +8,7 @@
 ___
 
 ## Overview
-[Demo Link](https://jiaww.github.io/homework-5-shape-grammar-city-Jiaww/)
+[Demo Link](https://jiaww.github.io/Procedural-City/)
 
 The goal of this project is to model an urban environment using a shape grammar. Although the project is only a one-week work, the details are pretty simple and direct. 
 
